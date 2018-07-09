@@ -118,7 +118,7 @@ def IndxVariableGenes(mean_genes, disp_genes, numgenes, mean_low_cutoff, mean_hi
         (genes_dispersion_scaled < np.log(disp_high_cutoff)) & (genes_dispersion_scaled > np.log(disp_low_cutoff)))[0]
 
     if (zero_type == 1):
-        filename = "Figures/scatter_hvg_mean_" + str(mean_low_cutoff) + "_disp_" + str(disp_low_cutoff) + "_in.png"
+        filename = "Figures/mean_" + str(mean_low_cutoff) + "_disp_" + str(disp_low_cutoff) + "_scatter_hvg_in.png"
 
         # Plot Highly variable Genes 
         plt.figure(figsize=(8,8))
@@ -128,7 +128,7 @@ def IndxVariableGenes(mean_genes, disp_genes, numgenes, mean_low_cutoff, mean_hi
         plt.title('Highly Variable Genes')
         plt.savefig(filename)
 
-        filename = "Figures/scatter_hvg_log_mean_" + str(mean_low_cutoff) + "_disp_" + str(disp_low_cutoff) + "_in.png"
+        filename = "Figures/log_mean_" + str(mean_low_cutoff) + "_disp_" + str(disp_low_cutoff) + "_scatter_hvg_in.png"
 
         # Plot Highly variable Genes 
         plt.figure(figsize=(8,8))
@@ -139,7 +139,7 @@ def IndxVariableGenes(mean_genes, disp_genes, numgenes, mean_low_cutoff, mean_hi
         plt.savefig(filename)
 
     if (zero_type == 2):
-        filename = "Figures/scatter_hvg_mean_" + str(mean_low_cutoff) + "_disp_" + str(disp_low_cutoff) + "_out.png"
+        filename = "Figures/mean_" + str(mean_low_cutoff) + "_disp_" + str(disp_low_cutoff) + "_scatter_hvg_out.png"
 
         # Plot Highly variable Genes 
         plt.figure(figsize=(8,8))
@@ -149,7 +149,7 @@ def IndxVariableGenes(mean_genes, disp_genes, numgenes, mean_low_cutoff, mean_hi
         plt.title('Highly Variable Genes')
         plt.savefig(filename)
 
-        filename = "Figures/scatter_hvg_log_mean_" + str(mean_low_cutoff) + "_disp_" + str(disp_low_cutoff) + "_out.png"
+        filename = "Figures/log_mean_" + str(mean_low_cutoff) + "_disp_" + str(disp_low_cutoff) + "_scatter_hvg_out.png"
 
         # Plot Highly variable Genes 
         plt.figure(figsize=(8,8))

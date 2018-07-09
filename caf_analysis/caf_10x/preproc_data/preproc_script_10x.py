@@ -36,7 +36,7 @@ with open("../data/Control/GRCh38/genes.tsv") as genes_all:
 	for column in zip(*[line for line in csv.reader(genes_all, dialect="excel-tab")]):
 		genes_name = column
 
-genes = np.reshape(genes_name, (len(genes_name), 1))
+genes = np.reshape(genes_name, (len(genes_name),))
 print "Reading in Matrix completed"
 
 # ============ Preprocessing data for quality control ============= #
@@ -58,7 +58,7 @@ mask[ind_gene] = mask_t
 
 ctrl_count_arr = sp_sparse.coo_matrix.toarray(caf_ctrl_count)
 ctrl_count_arr = ctrl_count_arr[~mask, :]
-genes = genes[~mask, :]
+genes = genes[~mask]
 
 print "Filter 0 cells and genes completed"
 
@@ -214,9 +214,44 @@ print "Plot of common highly variable genes"
 plt.figure(figsize=(8,8))
 venn2([set(ind_hvg_in['ind_genes']), set(ind_hvg_out['ind_genes'])], ('Zero_In', 'Zero_out'))
 plt.title('Venn Diagram of common Highly Variable Genes')
-plt.savefig("Figures/venn_common_hvg_genes_mean_0.1_disp_0.1.png")
+plt.savefig("Figures/mean_0.1_disp_0.1_venn_common_hvg_genes.png")
 
 matplotlib.pyplot.close('all')
+
+A = set(ind_hvg_in['ind_genes'])
+B = set(ind_hvg_out['ind_genes'])
+
+##### Find intersection #####
+
+in_both = np.array(list(A & B))
+genes_in_both = genes[in_both]
+
+# Save files 
+file_dir = "save_results/mean_0.1_disp_0.1_genes_in_both.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_both)):
+  gn  = genes_in_both[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
+
+##### Find difference #####
+in_B_only  = np.array(list(B - A))
+genes_in_B_minus_A = genes[in_B_only]
+
+file_dir = "save_results/mean_0.1_disp_0.1_genes_zero_out_only.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_B_minus_A)):
+  gn  = genes_in_B_minus_A[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
 
 # ********* Plot of common genes with mean_low_cutoff = 0.5, disp_low_cutoff = 0.5 *********** #
 mean_low_cutoff = 0.5
@@ -234,9 +269,59 @@ print "Plot of common highly variable genes"
 plt.figure(figsize=(8,8))
 venn2([set(ind_hvg_in['ind_genes']), set(ind_hvg_out['ind_genes'])], ('Zero_In', 'Zero_out'))
 plt.title('Venn Diagram of common Highly Variable Genes')
-plt.savefig("Figures/venn_common_hvg_genes_mean_0.5_disp_0.5.png")
+plt.savefig("Figures/mean_0.5_disp_0.5_venn_common_hvg_genes.png")
 
 matplotlib.pyplot.close('all')
+
+A = set(ind_hvg_in['ind_genes'])
+B = set(ind_hvg_out['ind_genes'])
+
+##### Find intersection #####
+
+in_both = np.array(list(A & B))
+genes_in_both = genes[in_both]
+
+# Save files 
+file_dir = "save_results/mean_0.5_disp_0.5_genes_in_both.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_both)):
+  gn  = genes_in_both[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
+
+##### Find difference #####
+in_A_only  = np.array(list(A - B))
+genes_in_A_minus_B = genes[in_A_only]
+
+file_dir = "save_results/mean_0.5_disp_0.5_genes_zero_in_only.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_A_minus_B)):
+  gn  = genes_in_A_minus_B[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
+
+##### Find difference #####
+in_B_only  = np.array(list(B - A))
+genes_in_B_minus_A = genes[in_B_only]
+
+file_dir = "save_results/mean_0.5_disp_0.5_genes_zero_out_only.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_B_minus_A)):
+  gn  = genes_in_B_minus_A[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
 
 # ********* Plot of common genes with mean_low_cutoff = 1, disp_low_cutoff = 1 *********** #
 mean_low_cutoff = 1
@@ -254,9 +339,59 @@ print "Plot of common highly variable genes"
 plt.figure(figsize=(8,8))
 venn2([set(ind_hvg_in['ind_genes']), set(ind_hvg_out['ind_genes'])], ('Zero_In', 'Zero_out'))
 plt.title('Venn Diagram of common Highly Variable Genes')
-plt.savefig("Figures/venn_common_hvg_genes_mean_1_disp_1.png")
+plt.savefig("Figures/mean_1_disp_1_venn_common_hvg_genes.png")
 
 matplotlib.pyplot.close('all')
+
+A = set(ind_hvg_in['ind_genes'])
+B = set(ind_hvg_out['ind_genes'])
+
+##### Find intersection #####
+
+in_both = np.array(list(A & B))
+genes_in_both = genes[in_both]
+
+# Save files 
+file_dir = "save_results/mean_1_disp_1_genes_in_both.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_both)):
+  gn  = genes_in_both[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
+
+##### Find difference #####
+in_A_only  = np.array(list(A - B))
+genes_in_A_minus_B = genes[in_A_only]
+
+file_dir = "save_results/mean_1_disp_1_genes_zero_in_only.csv"
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_A_minus_B)):
+  gn  = genes_in_A_minus_B[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
+
+##### Find difference #####
+in_B_only  = np.array(list(B - A))
+genes_in_B_minus_A = genes[in_B_only]
+
+file_dir = "save_results/mean_1_disp_1_genes_zero_out_only.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_B_minus_A)):
+  gn  = genes_in_B_minus_A[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
 
 # ********* Plot of common genes with mean_low_cutoff = 2, disp_low_cutoff = 2 *********** #
 mean_low_cutoff = 2
@@ -274,11 +409,59 @@ print "Plot of common highly variable genes"
 plt.figure(figsize=(8,8))
 venn2([set(ind_hvg_in['ind_genes']), set(ind_hvg_out['ind_genes'])], ('Zero_In', 'Zero_out'))
 plt.title('Venn Diagram of common Highly Variable Genes')
-plt.savefig("Figures/venn_common_hvg_genes_mean_2_disp_2.png")
+plt.savefig("Figures/mean_2_disp_2_venn_common_hvg_genes.png")
 
 matplotlib.pyplot.close('all')
 
+A = set(ind_hvg_in['ind_genes'])
+B = set(ind_hvg_out['ind_genes'])
 
+##### Find intersection #####
+
+in_both = np.array(list(A & B))
+genes_in_both = genes[in_both]
+
+# Save files 
+file_dir = "save_results/mean_2_disp_2_genes_in_both.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_both)):
+  gn  = genes_in_both[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
+
+##### Find difference #####
+in_A_only  = np.array(list(A - B))
+genes_in_A_minus_B = genes[in_A_only]
+
+file_dir = "save_results/mean_2_disp_2_genes_zero_in_only.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_A_minus_B)):
+  gn  = genes_in_A_minus_B[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
+
+##### Find difference #####
+in_B_only  = np.array(list(B - A))
+genes_in_B_minus_A = genes[in_B_only]
+
+file_dir = "save_results/mean_2_disp_2_genes_zero_out_only.csv" 
+
+csv  = open(file_dir, "w") 
+columnTitleRow = "Gene"
+csv.write(columnTitleRow)
+for j in range(len(genes_in_B_minus_A)):
+  gn  = genes_in_B_minus_A[j]
+  row = gn + "\n"
+  csv.write(row)
+csv.close()
 
 
 
